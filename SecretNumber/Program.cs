@@ -44,17 +44,27 @@ namespace SecretNumber
     {
         static void Main(string[] args)
         {
-            var numberClass = new Number();
+            var number = new Number();
 
-            var minValue = numberClass.GetRandomNumberWithMessage("Please provide a minimum value to generate a random number: ");
-            var maxValue = numberClass.GetRandomNumberWithMessage("Please provide a maximum value to generate a random number: ");
+            var minValue = number.GetRandomNumberWithMessage("Please provide a minimum value to generate a random number: ");
+            var maxValue = number.GetRandomNumberWithMessage("Please provide a maximum value to generate a random number: ");
 
-            var secretNumber = numberClass.GetRandomNumberInRange(minValue, maxValue);
+            var secretNumber = number.GetRandomNumberInRange(minValue, maxValue);
             Console.WriteLine("Secret Number is : {0}",secretNumber);
 
-            var userGuess = numberClass.GetRandomNumberWithMessage("Try to guess the secret number: ");
 
-            numberClass.CheckUserGuess(userGuess, secretNumber);
+            var isWinner = false;
+            while (!isWinner)
+            {
+                var userGuess = number.GetRandomNumberWithMessage("Try to guess the secret number: ");
+
+                isWinner = number.CheckUserGuess(userGuess, secretNumber);
+
+                Console.WriteLine(isWinner);
+                //isWinner = true;
+            }
+
+            
 
 
             Console.ReadLine();
