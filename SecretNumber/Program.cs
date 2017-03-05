@@ -50,21 +50,21 @@ namespace SecretNumber
             var maxValue = number.GetRandomNumberWithMessage("Please provide a maximum value to generate a random number: ");
 
             var secretNumber = number.GetRandomNumberInRange(minValue, maxValue);
-            Console.WriteLine("Secret Number is : {0}",secretNumber);
+            //Console.WriteLine("Secret Number is : {0}",secretNumber);
 
 
             var isWinner = false;
             while (!isWinner)
             {
                 var userGuess = number.GetRandomNumberWithMessage("Try to guess the secret number: ");
-
                 isWinner = number.CheckUserGuess(userGuess, secretNumber);
-
-                Console.WriteLine(isWinner);
-                //isWinner = true;
             }
 
-            
+            //foreach (var guess in number.UserGuesses)
+            //{
+            //    Console.Write(" {0} ", guess);
+            //}
+            number.DisplayAllGuesses();
 
 
             Console.ReadLine();

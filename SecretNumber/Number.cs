@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SecretNumber
 {
     public class Number
     {
         private readonly Random _random = new Random();
+        public List<int> UserGuesses { get; private set; } = new List<int>();
+        public int NumberOfTries { get; private set; } = 0;
 
         /// <summary>
         /// Returns the random number from a range of numbers provided by the user.
@@ -47,10 +50,11 @@ namespace SecretNumber
 
         public bool CheckUserGuess(int userGuess, int secretNumber)
         {
+            UpdateGuessesAndTries(userGuess);
             if (userGuess != secretNumber)
             {
                 if (userGuess > secretNumber)
-                {
+                {                    
                     Console.WriteLine("Nope, the secret number is less then " + userGuess);
                     return false; 
                         
@@ -63,7 +67,24 @@ namespace SecretNumber
             }
             //user got the number! 
             Console.WriteLine("Congrats! You got the secret number!");
+            Console.WriteLine("It took you {0} tries to get the number", NumberOfTries );
             return true;
+        }
+
+        private void UpdateGuessesAndTries(int userGuess)
+        {
+            UserGuesses.Add(userGuess);
+            NumberOfTries++;
+        }
+
+        public void DisplayAllGuesses()
+        {
+            var textToDisplay = "The list of all guesses: ";
+            foreach (var guess in UserGuesses)
+            {
+                textToDisplay += guess + " ";
+            }
+            Console.WriteLine(textToDisplay);
         }
     }
 }
