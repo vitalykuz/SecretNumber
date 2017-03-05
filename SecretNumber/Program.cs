@@ -50,8 +50,11 @@ namespace SecretNumber
             var maxValue = number.GetRandomNumberWithMessage("Please provide a maximum value to generate a random number: ");
 
             var secretNumber = number.GetRandomNumberInRange(minValue, maxValue);
-            //Console.WriteLine("Secret Number is : {0}",secretNumber);
+            Console.WriteLine("Secret Number is : {0}",secretNumber);
 
+            //creates a timer and starts the timer
+            Timer timer = new Timer();
+            timer.StartWatch();
 
             var isWinner = false;
             while (!isWinner)
@@ -60,12 +63,15 @@ namespace SecretNumber
                 isWinner = number.CheckUserGuess(userGuess, secretNumber);
             }
 
-            //foreach (var guess in number.UserGuesses)
-            //{
-            //    Console.Write(" {0} ", guess);
-            //}
+            //user got the number, stop the timer
+            timer.StopWatch();
+
+            // displays the list of guesses
             number.DisplayAllGuesses();
 
+            //displays the time spent on guessing
+            long timeSpentOnGuessing =  timer.GetElapsedTimeInMs() / 1000 ;
+            Console.WriteLine("You spent {0} seconds ", timeSpentOnGuessing);
 
             Console.ReadLine();
         } 
